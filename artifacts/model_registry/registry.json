@@ -7,7 +7,7 @@
   },
   "models": [
     {
-      "run_id": "20260415104753",
+      "run_id": "20260415110200",
       "model_version": "churn-model-v1",
       "model_path": "models\\churn_model.joblib",
       "dataset_version": "refined-customers-support_tickets-v1",
@@ -42,7 +42,7 @@
         "train_rows": 5625,
         "test_rows": 1407
       },
-      "registered_at": "2026-04-15T10:47:53.921252Z"
+      "registered_at": "2026-04-15T11:02:00.393160Z"
     }
   ]
 }
