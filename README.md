@@ -1,5 +1,5 @@
 # Churn Risk Intelligence Service  
-### DevOps + MLOps Architecture Assignment
+### DevOps + MLOps Architecture Assignment - 2
 
 **Name:** B. Chamith Kalyan  
 **Roll No:** 2022BCS0117  
@@ -162,6 +162,19 @@ pytest
 - Model registry metadata in `artifacts/model_registry/registry.json`
 - DVC stage definition in `dvc.yaml`
 - Scheduled CI workflow for retraining and monitoring
+
+---
+
+## 🧠 MLOps Flow (DVC + MLflow)
+
+1. Data is versioned using DVC  
+2. Feature engineering pipeline ensures consistency  
+3. Model is trained on versioned datasets  
+4. Experiments are tracked using MLflow  
+5. Best model is registered and promoted  
+6. Model is deployed via FastAPI API  
+7. Monitoring tracks performance and drift  
+8. CI/CD triggers retraining (Continuous Training)
 
 ---
 
