@@ -1,6 +1,6 @@
 import json
 from dataclasses import dataclass
-from datetime import datetime, timedelta
+from datetime import UTC, datetime, timedelta
 from pathlib import Path
 from typing import Any
 
@@ -242,6 +242,13 @@ def _update_model_registry(run_record: dict[str, Any]) -> None:
     REGISTRY_PATH.write_text(json.dumps(registry, indent=2), encoding="utf-8")
 
 
+def _serialize_model_path(model_path: Path) -> str:
+    try:
+        return str(model_path.relative_to(BASE_DIR))
+    except ValueError:
+        return str(model_path)
+
+
 def train_model(
     customers_path: Path = CUSTOMERS_PATH,
     tickets_path: Path = TICKETS_PATH,
@@ -282,7 +289,7 @@ def train_model(
         "feature_columns": FEATURE_COLUMNS,
         "categorical_features": CATEGORICAL_FEATURES,
         "numeric_features": NUMERIC_FEATURES,
-        "trained_at": datetime.utcnow().isoformat() + "Z",
+        "trained_at": datetime.now(UTC).isoformat().replace("+00:00", "Z"),
         "dataset_version": "refined-customers-support_tickets-v1",
         "reference_time": tickets["created_at"].max().isoformat(),
         "metrics": metrics,
@@ -294,9 +301,9 @@ def train_model(
     metrics_path.write_text(json.dumps(metrics, indent=2), encoding="utf-8")
 
     run_record = {
-        "run_id": datetime.utcnow().strftime("%Y%m%d%H%M%S"),
+        "run_id": datetime.now(UTC).strftime("%Y%m%d%H%M%S"),
         "model_version": "churn-model-v1",
-        "model_path": str(model_path.relative_to(BASE_DIR)),
+        "model_path": _serialize_model_path(model_path),
         "dataset_version": artifact["dataset_version"],
         "feature_list": FEATURE_COLUMNS,
         "hyperparameters": {
