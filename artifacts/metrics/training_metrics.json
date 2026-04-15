@@ -1,0 +1,7 @@
+{
+  "f1": 1.0,
+  "roc_auc": 1.0,
+  "precision_recall_auc": 1.0,
+  "train_rows": 5625,
+  "test_rows": 1407
+}

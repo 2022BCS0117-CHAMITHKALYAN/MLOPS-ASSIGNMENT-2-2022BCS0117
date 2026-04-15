@@ -1,0 +1,12 @@
+data:
+  raw_customers: data/refined/customers.csv
+  raw_tickets: data/refined/support_tickets.csv
+  dataset_version: refined-customers-support_tickets-v1
+
+training:
+  test_size: 0.2
+  random_state: 42
+  model_type: random_forest
+  n_estimators: 250
+  max_depth: 10
+  min_samples_leaf: 2

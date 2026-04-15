@@ -1,0 +1,23 @@
+stages:
+  train_model:
+    cmd: python scripts/train_model.py
+    deps:
+      - scripts/train_model.py
+      - scripts/monitor_model.py
+      - src/pipeline/training_pipeline.py
+      - src/pipeline/inference_pipeline.py
+      - src/pipeline/monitoring.py
+      - data/refined/customers.csv
+      - data/refined/support_tickets.csv
+    params:
+      - data.dataset_version
+      - training.test_size
+      - training.random_state
+      - training.model_type
+      - training.n_estimators
+      - training.max_depth
+      - training.min_samples_leaf
+    outs:
+      - models/churn_model.joblib
+    metrics:
+      - artifacts/metrics/training_metrics.json
